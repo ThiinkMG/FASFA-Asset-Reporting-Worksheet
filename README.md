@@ -8,7 +8,7 @@ This worksheet provides a systematic approach to asset reporting for FAFSA appli
 
 ### Try it out
 
-[Try FASFA Asset Reporting Worksheet (Online Link)](https://thiinkmg.github.io/fasfa-Asset-reporting-worksheet/)
+[Try FASFA Asset Reporting Worksheet (Online Link)](https://thiinkmg.github.io/FASFA-Asset-Reporting-Worksheet/)
 
 ---
 
