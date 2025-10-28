@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAFSA Asset Reporting Worksheet - My College Finance</title>
+  <style>
+    /* MCF CSS Variables - Complete Brand System */
+    :root {
+      /* Primary Brand Colors */
+      --mcf-brand-blue: #012699;
+      --mcf-brand-green: #26e011;
+      --mcf-brand-amber: #fdc003;
+      --mcf-brand-black: #000516;
+      
+      /* Light Mode */
+      --mcf-background: #fafafa;
+      --mcf-foreground: #09090b;
+      --mcf-card: #ffffff;
+      --mcf-card-foreground: #09090b;
+      --mcf-primary: #336bff;
+      --mcf-primary-foreground: #f8fafc;
+      --mcf-secondary: #f1f5f9;
+      --mcf-secondary-foreground: #64748b;
+      --mcf-muted: #f1f5f9;
+      --mcf-muted-foreground: #64748b;
+      --mcf-destructive: #ef4444;
+      --mcf-destructive-foreground: #f8fafc;
+      --mcf-border: #e2e8f0;
+      --mcf-input: #e2e8f0;
+      --mcf-radius: 0.5rem;
+      --mcf-transition: all 0.3s ease;
+      --mcf-success: #26e011;
+      --mcf-warning: #fdc003;
+    }
+    
+    /* Dark Mode */
+    body.dark-mode {
+      --mcf-background: #09090b;
+      --mcf-foreground: #f8fafc;
+      --mcf-card: #1a1a1f;
+      --mcf-card-foreground: #f8fafc;
+      --mcf-primary: #4c6ef5;
+      --mcf-secondary: #374151;
+      --mcf-secondary-foreground: #f8fafc;
+      --mcf-muted: #1c1917;
+      --mcf-muted-foreground: #94a3b8;
+      --mcf-destructive: #991b1b;
+      --mcf-border: #374151;
+      --mcf-input: #1f2937;
+      --mcf-brand-blue: #0139cc;
+      --mcf-brand-green: #3ae826;
+      --mcf-brand-amber: #fdc922;
+      --mcf-brand-black: #f0f1ff;
+    }
+    
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                   'Helvetica Neue', Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      background-color: var(--mcf-background);
+      color: var(--mcf-foreground);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    /* Header Styles */
+    .mcf-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: rgba(250, 250, 250, 0.95);
+      border-bottom: 1px solid var(--mcf-border);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+    }
+    
+    body.dark-mode .mcf-header {
+      background-color: rgba(9, 9, 11, 0.95);
+    }
+    
+    .mcf-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    .mcf-header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .mcf-header-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .mcf-logo-header {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    
+    .mcf-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .mcf-brand-name {
+      font-size: 1.25rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--mcf-brand-blue);
+    }
+    
+    .mcf-tagline {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mcf-muted-foreground);
+    }
+    
+    .mcf-header-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    
+    /* Theme Toggle */
+    .mcf-theme-toggle {
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 2px solid var(--mcf-border);
+      background: var(--mcf-card);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--mcf-transition);
+      color: var(--mcf-foreground);
+    }
+    
+    .mcf-theme-toggle:hover {
+      border-color: var(--mcf-primary);
+      transform: scale(1.1);
+    }
+    
+    .mcf-sun-icon, .mcf-moon-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* Main Content */
+    .mcf-main {
+      padding: 2rem 0 4rem;
+    }
+    
+    /* Hero Section */
+    .mcf-hero {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 0;
+    }
+    
+    .mcf-hero-title {
+      font-size: 2.25rem;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--mcf-foreground);
+      margin-bottom: 1rem;
+    }
+    
+    .mcf-hero-subtitle {
+      font-size: 1.125rem;
+      color: var(--mcf-muted-foreground);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+    
+    /* Alert Box */
+    .mcf-alert {
+      background: linear-gradient(135deg, rgba(253, 192, 3, 0.1) 0%, transparent 100%);
+      border: 2px solid var(--mcf-brand-amber);
+      border-radius: calc(var(--mcf-radius) * 1.5);
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: start;
+    }
+    
+    .mcf-alert-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .mcf-alert-content {
+      flex: 1;
+    }
+    
+    .mcf-alert-title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--mcf-foreground);
+    }
+    
+    .mcf-alert-description {
+      font-size: 0.875rem;
+      color: var(--mcf-muted-foreground);
+      line-height: 1.6;
+    }
+    
+    /* Card Styles */
+    .mcf-card {
+      background: var(--mcf-card);
+      border: 2px solid var(--mcf-border);
+      border-radius: calc(var(--mcf-radius) * 1.5);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      transition: var(--mcf-transition);
+    }
+    
+    .mcf-card-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--mcf-border);
+    }
+    
+    .mcf-card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--mcf-foreground);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .mcf-card-description {
+      font-size: 0.875rem;
+      color: var(--mcf-muted-foreground);
+      margin-top: 0.5rem;
+      line-height: 1.6;
+    }
+    
+    /* Form Elements */
+    .mcf-form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .mcf-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--mcf-foreground);
+      margin-bottom: 0.5rem;
+    }
+    
+    .mcf-input {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 0.875rem;
+      background: var(--mcf-background);
+      color: var(--mcf-foreground);
+      border: 2px solid var(--mcf-input);
+      border-radius: var(--mcf-radius);
+      transition: var(--mcf-transition);
+      font-family: inherit;
+    }
+    
+    .mcf-input:focus {
+      outline: none;
+      border-color: var(--mcf-primary);
+      box-shadow: 0 0 0 3px rgba(51, 107, 255, 0.1);
+    }
+    
+    .mcf-input.filled {
+      border-color: var(--mcf-brand-green);
+    }
+    
+    .mcf-helper-text {
+      font-size: 0.75rem;
+      color: var(--mcf-muted-foreground);
+      margin-top: 0.25rem;
+      font-style: italic;
+    }
+    
+    /* Grid Layout */
+    .mcf-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(1, 1fr);
+    }
+    
+    @media (min-width: 768px) {
+      .mcf-grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    /* Buttons */
+    .mcf-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: var(--mcf-radius);
+      transition: var(--mcf-transition);
+      cursor: pointer;
+      border: none;
+      outline: none;
+      text-decoration: none;
+      font-family: inherit;
+      gap: 0.5rem;
+    }
+    
+    .mcf-btn-primary {
+      background: var(--mcf-primary);
+      color: var(--mcf-primary-foreground);
+    }
+    
+    .mcf-btn-primary:hover:not(:disabled) {
+      background: var(--mcf-brand-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .mcf-btn-secondary {
+      background: var(--mcf-secondary);
+      color: var(--mcf-secondary-foreground);
+    }
+    
+    .mcf-btn-secondary:hover:not(:disabled) {
+      background: var(--mcf-muted);
+    }
+    
+    .mcf-btn-success {
+      background: var(--mcf-brand-green);
+      color: var(--mcf-brand-black);
+    }
+    
+    .mcf-btn-success:hover:not(:disabled) {
+      background: #1fb80d;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(38, 224, 17, 0.2);
+    }
+    
+    .mcf-btn-reset {
+      background: var(--mcf-destructive);
+      color: var(--mcf-destructive-foreground);
+      border: 2px solid var(--mcf-destructive);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .mcf-btn-reset:hover:not(:disabled) {
+      background: #dc2626;
+      border-color: #dc2626;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(239, 68, 68, 0.3);
+    }
+    
+    .mcf-btn-reset:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4);
+    }
+    
+    .mcf-btn-reset::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .mcf-btn-reset:hover::before {
+      left: 100%;
+    }
+    
+    .mcf-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .mcf-btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    
+    /* Total Display */
+    .mcf-total-card {
+      background: linear-gradient(135deg, rgba(1, 38, 153, 0.1) 0%, transparent 100%);
+      border: 3px solid var(--mcf-brand-blue);
+      border-radius: calc(var(--mcf-radius) * 2);
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    
+    .mcf-total-label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--mcf-muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    
+    .mcf-total-amount {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--mcf-brand-blue);
+    }
+    
+    /* Checklist */
+    .mcf-checklist {
+      background: var(--mcf-card);
+      border: 2px solid var(--mcf-border);
+      border-radius: calc(var(--mcf-radius) * 1.5);
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .mcf-checklist-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--mcf-foreground);
+    }
+    
+    .mcf-checklist-item {
+      display: flex;
+      align-items: start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--mcf-border);
+    }
+    
+    .mcf-checklist-item:last-child {
+      border-bottom: none;
+    }
+    
+    .mcf-checklist-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+    
+    /* Info Box */
+    .mcf-info-box {
+      background: linear-gradient(135deg, rgba(51, 107, 255, 0.05) 0%, transparent 100%);
+      border-left: 4px solid var(--mcf-primary);
+      padding: 1rem 1.5rem;
+      border-radius: var(--mcf-radius);
+      margin: 1rem 0;
+    }
+    
+    .mcf-info-box-title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--mcf-foreground);
+    }
+    
+    .mcf-info-box-content {
+      font-size: 0.875rem;
+      color: var(--mcf-muted-foreground);
+      line-height: 1.6;
+    }
+    
+    /* Warning Box */
+    .mcf-warning-box {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%);
+      border-left: 4px solid var(--mcf-destructive);
+      padding: 1rem 1.5rem;
+      border-radius: var(--mcf-radius);
+      margin: 1rem 0;
+    }
+    
+    .mcf-warning-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .mcf-warning-item {
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: start;
+      gap: 0.5rem;
+    }
+    
+    /* Footer */
+    .mcf-footer {
+      background: linear-gradient(to bottom, #111827, #000000);
+      color: white;
+      padding: 3rem 0;
+      margin-top: 4rem;
+    }
+    
+    .mcf-footer-content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    .mcf-footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .mcf-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+    }
+    
+    .mcf-footer-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+    }
+    
+    .mcf-footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    
+    .mcf-footer-link {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.3s ease;
+    }
+    
+    .mcf-footer-link:hover {
+      color: var(--mcf-brand-amber);
+      text-decoration: underline;
+    }
+    
+    .mcf-footer-separator {
+      color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .mcf-footer-tagline {
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      color: var(--mcf-brand-amber);
+      font-weight: 500;
+      margin: 1rem 0;
+    }
+    
+    .mcf-footer-copyright {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Auto-save indicator */
+    .mcf-save-indicator {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--mcf-success);
+      color: var(--mcf-brand-black);
+      border-radius: var(--mcf-radius);
+      font-weight: 600;
+      font-size: 0.875rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(38, 224, 17, 0.3);
+    }
+    
+    .mcf-save-indicator.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Dynamic Account Row */
+    .mcf-account-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-end;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: var(--mcf-background);
+      border-radius: var(--mcf-radius);
+      border: 1px solid var(--mcf-border);
+      transition: var(--mcf-transition);
+    }
+    
+    .mcf-account-row:hover {
+      border-color: var(--mcf-primary);
+    }
+    
+    .mcf-account-row .mcf-form-group {
+      margin-bottom: 0;
+      flex: 1;
+    }
+    
+    .mcf-account-row .mcf-input {
+      margin-bottom: 0;
+    }
+    
+    .mcf-btn-icon {
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .mcf-btn-add {
+      background: var(--mcf-brand-green);
+      color: var(--mcf-brand-black);
+      border: none;
+    }
+    
+    .mcf-btn-add:hover:not(:disabled) {
+      background: #1fb80d;
+      transform: scale(1.05);
+    }
+    
+    .mcf-btn-delete {
+      background: var(--mcf-destructive);
+      color: var(--mcf-destructive-foreground);
+      border: none;
+    }
+    
+    .mcf-btn-delete:hover:not(:disabled) {
+      background: #dc2626;
+      transform: scale(1.05);
+    }
+    
+    .mcf-section-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid var(--mcf-border);
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .mcf-section-footer .mcf-total-card {
+      min-width: 200px;
+      max-width: 300px;
+      flex-shrink: 0;
+    }
+    
+    .mcf-btn-calculate {
+      background: var(--mcf-primary);
+      color: var(--mcf-primary-foreground);
+    }
+    
+    .mcf-btn-calculate:hover:not(:disabled) {
+      background: var(--mcf-brand-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(1, 38, 153, 0.3);
+    }
+    
+    .mcf-accounts-container {
+      margin-bottom: 1rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .mcf-brand-text {
+        display: none;
+      }
+      
+      .mcf-logo-header {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .mcf-hero-title {
+        font-size: 1.75rem;
+      }
+      
+      .mcf-total-amount {
+        font-size: 2rem;
+      }
+      
+      .mcf-section-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+      }
+      
+      .mcf-section-footer .mcf-total-card {
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+      }
+      
+      .mcf-section-footer .mcf-btn-calculate {
+        width: 100%;
+      }
+    }
+    
+    /* Collapsible Section Styles */
+    .mcf-collapsible-section {
+      margin: 1rem 0;
+    }
+
+    .mcf-toggle-btn {
+      width: 100%;
+      background: var(--mcf-card);
+      border: 2px solid var(--mcf-border);
+      border-radius: var(--mcf-radius);
+      padding: 0.75rem 1rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--mcf-foreground);
+      transition: var(--mcf-transition);
+      font-family: inherit;
+    }
+
+    .mcf-toggle-btn:hover {
+      background: var(--mcf-accent);
+      border-color: var(--mcf-primary);
+    }
+
+    .mcf-toggle-icon {
+      color: var(--mcf-primary);
+      font-size: 0.75rem;
+      transition: transform 0.3s ease;
+    }
+
+    .mcf-collapsible-content {
+      padding: 1rem;
+      background: var(--mcf-muted);
+      border: 2px solid var(--mcf-border);
+      border-top: none;
+      border-radius: 0 0 var(--mcf-radius) var(--mcf-radius);
+      margin-top: -2px;
+    }
+
+    .mcf-collapsible-content ul {
+      margin: 0;
+      padding-left: 1.5rem;
+    }
+
+    .mcf-collapsible-content li {
+      margin: 0.5rem 0;
+    }
+
+    /* Print Styles */
+    @media print {
+      .mcf-header, .mcf-footer, .mcf-btn-group, .mcf-theme-toggle, .mcf-save-indicator {
+        display: none !important;
+      }
+      
+      body {
+        background: white;
+        color: black;
+      }
+      
+      .mcf-card {
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="mcf-header">
+    <div class="mcf-container">
+      <div class="mcf-header-content">
+        <div class="mcf-header-brand">
+          <img 
+            src="https://static.wixstatic.com/media/c24a60_2b6231b666214539ae22ebd2dffe7a09~mv2.png" 
+            alt="My College Finance Logo"
+            class="mcf-logo-header"
+          >
+          <div class="mcf-brand-text">
+            <h1 class="mcf-brand-name">MY COLLEGE FINANCE</h1>
+            <p class="mcf-tagline">EDUCATE • MOTIVATE • ELEVATE</p>
+          </div>
+        </div>
+        <div class="mcf-header-actions">
+          <button id="mcf-theme-toggle" class="mcf-theme-toggle" aria-label="Toggle dark mode">
+            <svg class="mcf-sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="4" fill="currentColor"/>
+              <path d="M10 0v4M10 16v4M20 10h-4M4 10H0M17.07 2.93l-2.83 2.83M5.76 14.24l-2.83 2.83M17.07 17.07l-2.83-2.83M5.76 5.76L2.93 2.93" 
+                stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <svg class="mcf-moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:none;">
+              <path d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C10.3395 3 10.6734 3.02389 11 3.07039C9.27477 4.07544 8 5.8965 8 8C8 11.3137 10.6863 14 14 14C15.1035 14 16.0754 13.6238 16.9296 12.9998C16.9762 13.3266 17 13.6605 17 14Z" 
+                fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="mcf-main">
+    <div class="mcf-container">
+      <!-- Hero Section -->
+      <div class="mcf-hero">
+        <h1 class="mcf-hero-title">📊 FAFSA Asset Reporting Worksheet</h1>
+        <p class="mcf-hero-subtitle">
+          Accurately gather, calculate, and verify all financial assets required by FAFSA. 
+          Complete this worksheet before starting your FAFSA application to save time and prevent mistakes.
+        </p>
+      </div>
+
+      <!-- Important Alert -->
+      <div class="mcf-alert">
+        <div class="mcf-alert-icon">💡</div>
+        <div class="mcf-alert-content">
+          <div class="mcf-alert-title">Important: Report Current Balances</div>
+          <div class="mcf-alert-description">
+            Enter your current balances as of today's date — not averages or projected amounts. 
+            The FAFSA asks for today's financial picture, not what you had last month or expect to have next year.
+          </div>
+        </div>
+      </div>
+
+      <!-- Student Information -->
+      <div class="mcf-card">
+        <div class="mcf-card-header">
+          <h2 class="mcf-card-title">
+            👤 Student Information
+          </h2>
+          <p class="mcf-card-description">Enter your basic information for this worksheet</p>
+        </div>
+        <div class="mcf-grid mcf-grid-2">
+          <div class="mcf-form-group">
+            <label class="mcf-label">Student Name</label>
+            <input type="text" class="mcf-input" id="student-name" placeholder="Enter full name">
+          </div>
+          <div class="mcf-form-group">
+            <label class="mcf-label">Date Completed</label>
+            <input type="date" class="mcf-input" id="completion-date">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 1: Cash, Savings, and Checking -->
+      <div class="mcf-card">
+        <div class="mcf-card-header">
+          <h2 class="mcf-card-title">
+            🏦 Section 1: Cash, Savings, and Checking Accounts
+          </h2>
+          <p class="mcf-card-description">List all bank accounts as of today</p>
+        </div>
+        
+        <div class="mcf-accounts-container" id="cash-accounts">
+          <!-- Dynamic accounts will be added here -->
+        </div>
+        
+        <button class="mcf-btn mcf-btn-secondary" onclick="addAccount('cash')">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+            <path d="M10 5V15M5 10H15" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Add Another Account
+        </button>
+        
+        <div class="mcf-section-footer">
+          <button class="mcf-btn mcf-btn-calculate" onclick="calculateSection('cash')">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+              <path d="M9 2L3 8L9 14M3 8H17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Calculate Total
+          </button>
+          <div class="mcf-total-card" style="margin: 0;">
+            <div class="mcf-total-label">Section 1 Total</div>
+            <div class="mcf-total-amount" id="total-cash">$0.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Investments -->
+      <div class="mcf-card">
+        <div class="mcf-card-header">
+          <h2 class="mcf-card-title">
+            📈 Section 2: Investments
+          </h2>
+          <p class="mcf-card-description">Report investment accounts (DO NOT include retirement accounts)</p>
+        </div>
+        
+        <!-- Section 2: Investment Guidelines (Collapsible) -->
+        <div class="mcf-collapsible-section">
+          <button class="mcf-toggle-btn" onclick="toggleSection('section2-include')">
+            <span class="mcf-toggle-icon" id="section2-include-icon">▼</span>
+            <strong>✅ What to Include:</strong>
+          </button>
+          <div class="mcf-collapsible-content" id="section2-include" style="display: none;">
+            <ul>
+              <li>Stocks, bonds, mutual funds, ETFs</li>
+              <li>Brokerage accounts (Robinhood, E*TRADE, etc.)</li>
+              <li>Real estate investments (NOT your primary home)</li>
+              <li>Cryptocurrency holdings</li>
+              <li>Certificates of deposit (CDs)</li>
+              <li>Money market accounts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mcf-collapsible-section mcf-mt-2">
+          <button class="mcf-toggle-btn" onclick="toggleSection('section2-exclude')">
+            <span class="mcf-toggle-icon" id="section2-exclude-icon">▼</span>
+            <strong>🚫 DO NOT Include:</strong>
+          </button>
+          <div class="mcf-collapsible-content" id="section2-exclude" style="display: none;">
+            <ul>
+              <li>❌ Retirement accounts (401k, IRA, Roth IRA)</li>
+              <li>❌ Primary home equity</li>
+              <li>❌ Life insurance cash value</li>
+              <li>❌ Pensions</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="mcf-accounts-container" id="investments-accounts">
+          <!-- Dynamic accounts will be added here -->
+        </div>
+        
+        <button class="mcf-btn mcf-btn-secondary" onclick="addAccount('investments')">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+            <path d="M10 5V15M5 10H15" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Add Another Investment
+        </button>
+        
+        <div class="mcf-section-footer">
+          <button class="mcf-btn mcf-btn-calculate" onclick="calculateSection('investments')">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+              <path d="M9 2L3 8L9 14M3 8H17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Calculate Total
+          </button>
+          <div class="mcf-total-card" style="margin: 0;">
+            <div class="mcf-total-label">Section 2 Total</div>
+            <div class="mcf-total-amount" id="total-investments">$0.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: 529 Plans and Education Savings -->
+      <div class="mcf-card">
+        <div class="mcf-card-header">
+          <h2 class="mcf-card-title">
+            🎓 Section 3: 529 Plans & Education Savings
+          </h2>
+          <p class="mcf-card-description">Report education savings plans correctly</p>
+        </div>
+        
+        <!-- Section 3: 529 Plans (Collapsible) -->
+        <div class="mcf-collapsible-section">
+          <button class="mcf-toggle-btn" onclick="toggleSection('section3-529info')">
+            <span class="mcf-toggle-icon" id="section3-529info-icon">▼</span>
+            <strong>⚠️ Important for 529 Plans:</strong>
+          </button>
+          <div class="mcf-collapsible-content" id="section3-529info" style="display: none;">
+            <p><strong>Parent-Owned 529:</strong> Report as parent asset (lower impact on aid)</p>
+            <p><strong>Student-Owned 529:</strong> Report as student asset (higher impact on aid)</p>
+            <p><strong>Grandparent-Owned 529:</strong> Do NOT report as an asset (but distributions count as student income)</p>
+            <p><strong>Key Point:</strong> Report 529 plans under the ACCOUNT OWNER, not the beneficiary.</p>
+          </div>
+        </div>
+        
+        <div class="mcf-accounts-container" id="education-accounts">
+          <!-- Dynamic accounts will be added here -->
+        </div>
+        
+        <button class="mcf-btn mcf-btn-secondary" onclick="addAccount('education')">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+            <path d="M10 5V15M5 10H15" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Add Another Education Account
+        </button>
+        
+        <div class="mcf-section-footer">
+          <button class="mcf-btn mcf-btn-calculate" onclick="calculateSection('education')">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+              <path d="M9 2L3 8L9 14M3 8H17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Calculate Total
+          </button>
+          <div class="mcf-total-card" style="margin: 0;">
+            <div class="mcf-total-label">Section 3 Total</div>
+            <div class="mcf-total-amount" id="total-education">$0.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Trust Funds and Other Assets -->
+      <div class="mcf-card">
+        <div class="mcf-card-header">
+          <h2 class="mcf-card-title">
+            💼 Section 4: Trust Funds & Other Assets
+          </h2>
+          <p class="mcf-card-description">Report trust funds and miscellaneous assets</p>
+        </div>
+        
+        <div class="mcf-accounts-container" id="other-accounts">
+          <!-- Dynamic accounts will be added here -->
+        </div>
+        
+        <button class="mcf-btn mcf-btn-secondary" onclick="addAccount('other')">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+            <path d="M10 5V15M5 10H15" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Add Another Asset
+        </button>
+        
+        <div class="mcf-section-footer">
+          <button class="mcf-btn mcf-btn-calculate" onclick="calculateSection('other')">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+              <path d="M9 2L3 8L9 14M3 8H17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Calculate Total
+          </button>
+          <div class="mcf-total-card" style="margin: 0;">
+            <div class="mcf-total-label">Section 4 Total</div>
+            <div class="mcf-total-amount" id="total-other">$0.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grand Total -->
+      <div class="mcf-card" style="border: 3px solid var(--mcf-brand-blue); background: linear-gradient(135deg, rgba(1, 38, 153, 0.05) 0%, transparent 100%);">
+        <div class="mcf-card-header">
+          <h2 class="mcf-card-title" style="color: var(--mcf-brand-blue);">
+            💎 TOTAL REPORTABLE ASSETS
+          </h2>
+          <p class="mcf-card-description">This is the total amount to report on your FAFSA</p>
+        </div>
+        
+        <div class="mcf-total-card" style="border-color: var(--mcf-brand-blue); border-width: 3px;">
+          <div class="mcf-total-amount" id="grand-total" style="font-size: 3rem;">$0.00</div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+          <div style="text-align: center; padding: 1rem; background: var(--mcf-background); border-radius: var(--mcf-radius);">
+            <div style="font-size: 0.875rem; color: var(--mcf-muted-foreground); font-weight: 600;">Cash & Checking</div>
+            <div style="font-size: 1.25rem; font-weight: 700; color: var(--mcf-foreground); margin-top: 0.25rem;" id="summary-cash">$0.00</div>
+          </div>
+          <div style="text-align: center; padding: 1rem; background: var(--mcf-background); border-radius: var(--mcf-radius);">
+            <div style="font-size: 0.875rem; color: var(--mcf-muted-foreground); font-weight: 600;">Investments</div>
+            <div style="font-size: 1.25rem; font-weight: 700; color: var(--mcf-foreground); margin-top: 0.25rem;" id="summary-investments">$0.00</div>
+          </div>
+          <div style="text-align: center; padding: 1rem; background: var(--mcf-background); border-radius: var(--mcf-radius);">
+            <div style="font-size: 0.875rem; color: var(--mcf-muted-foreground); font-weight: 600;">Education Savings</div>
+            <div style="font-size: 1.25rem; font-weight: 700; color: var(--mcf-foreground); margin-top: 0.25rem;" id="summary-education">$0.00</div>
+          </div>
+          <div style="text-align: center; padding: 1rem; background: var(--mcf-background); border-radius: var(--mcf-radius);">
+            <div style="font-size: 0.875rem; color: var(--mcf-muted-foreground); font-weight: 600;">Other Assets</div>
+            <div style="font-size: 1.25rem; font-weight: 700; color: var(--mcf-foreground); margin-top: 0.25rem;" id="summary-other">$0.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pre-Submission Checklist -->
+      <div class="mcf-checklist">
+        <h3 class="mcf-checklist-title">✅ Double-Check Before Submission</h3>
+        <p style="color: var(--mcf-muted-foreground); margin-bottom: 1rem; font-size: 0.875rem;">
+          Review these items before moving forward with your FAFSA application:
+        </p>
+        
+        <div class="mcf-checklist-item">
+          <div class="mcf-checklist-icon">✅</div>
+          <div>
+            <strong>All Required Accounts Included?</strong><br>
+            <span style="font-size: 0.875rem; color: var(--mcf-muted-foreground);">
+              Check that you've listed all checking, savings, investment, and education savings accounts
+            </span>
+          </div>
+        </div>
+        
+        <div class="mcf-checklist-item">
+          <div class="mcf-checklist-icon">✅</div>
+          <div>
+            <strong>Excluded Correct Items?</strong><br>
+            <span style="font-size: 0.875rem; color: var(--mcf-muted-foreground);">
+              Confirmed you did NOT include: primary home, retirement accounts (401k, IRA), pensions, or personal property
+            </span>
+          </div>
+        </div>
+        
+        <div class="mcf-checklist-item">
+          <div class="mcf-checklist-icon">✅</div>
+          <div>
+            <strong>Current Balances (Not Estimates)?</strong><br>
+            <span style="font-size: 0.875rem; color: var(--mcf-muted-foreground);">
+              All amounts are based on TODAY's actual balances, not averages or projections
+            </span>
+          </div>
+        </div>
+        
+        <div class="mcf-checklist-item">
+          <div class="mcf-checklist-icon">✅</div>
+          <div>
+            <strong>529 Plans Under Correct Owner?</strong><br>
+            <span style="font-size: 0.875rem; color: var(--mcf-muted-foreground);">
+              Reported 529 plans under the account owner (parent vs. student) not the beneficiary
+            </span>
+          </div>
+        </div>
+        
+        <div class="mcf-checklist-item">
+          <div class="mcf-checklist-icon">✅</div>
+          <div>
+            <strong>Double-Checked After Major Expenses?</strong><br>
+            <span style="font-size: 0.875rem; color: var(--mcf-muted-foreground);">
+              Updated balances if you recently paid tuition or had other large expenses
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Common Mistakes Section (Collapsible) -->
+      <div class="mcf-collapsible-section">
+        <button class="mcf-toggle-btn" onclick="toggleSection('common-mistakes')" style="border-color: var(--mcf-destructive); background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%);">
+          <span class="mcf-toggle-icon" id="common-mistakes-icon" style="color: var(--mcf-destructive);">▼</span>
+          <strong style="color: var(--mcf-destructive);">⚠️ Common Mistakes to Avoid</strong>
+        </button>
+        <div class="mcf-collapsible-content" id="common-mistakes" style="display: none; border-color: var(--mcf-destructive);">
+          <ul>
+            <li>🚫 Counting home equity as an investment</li>
+            <li>🚫 Including retirement accounts or pensions as assets</li>
+            <li>🚫 Forgetting to update bank balances after major expenses</li>
+            <li>🚫 Using outdated or estimated balances</li>
+            <li>🚫 Reporting grandparent-owned 529 plans as assets</li>
+          </ul>
+          <p><strong>💡 Remember:</strong> The FAFSA asks for today's financial picture — not what you had last month or expect to have next year.</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mcf-btn-group">
+        <button class="mcf-btn mcf-btn-success" id="save-pdf">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+            <path d="M10 14V3M10 14L6 10M10 14L14 10M3 17H17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Save & Download PDF
+        </button>
+        
+        <button class="mcf-btn mcf-btn-primary" id="download-results">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V16C4 16.5304 4.21071 17.0391 4.58579 17.4142C4.96086 17.7893 5.46957 18 6 18H14C14.5304 18 15.0391 17.7893 15.4142 17.4142C15.7893 17.0391 16 16.5304 16 16V4C16 3.46957 15.7893 2.96086 15.4142 2.58579C15.0391 2.21071 14.5304 2 14 2Z" stroke-width="2"/>
+            <path d="M7 6H13M7 10H13M7 14H10" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          📄 Download My Results
+        </button>
+        
+        <button class="mcf-btn mcf-btn-reset" id="reset-form" title="⚠️ This will permanently delete all your data">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+            <path d="M3 10C3 10 3 5 10 5C17 5 17 10 17 10C17 10 17 15 10 15C3 15 3 10 3 10Z" stroke-width="2"/>
+            <path d="M13 10L10 7M10 7L7 10M10 7V13" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          ⚠️ Reset All Data
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mcf-footer">
+    <div class="mcf-container">
+      <div class="mcf-footer-content">
+        <div class="mcf-footer-brand">
+          <img 
+            src="https://static.wixstatic.com/media/c24a60_2b6231b666214539ae22ebd2dffe7a09~mv2.png" 
+            alt="My College Finance Logo"
+            class="mcf-logo"
+          >
+          <h2 class="mcf-footer-title">MY COLLEGE FINANCE</h2>
+        </div>
+        
+        <div class="mcf-footer-links">
+          <a href="https://www.mycollegefinance.com/" class="mcf-footer-link" target="_blank" rel="noopener">Main Website</a>
+          <span class="mcf-footer-separator">•</span>
+          <a href="https://www.mycollegefinance.com/privacy-policy" class="mcf-footer-link" target="_blank" rel="noopener">Privacy Policy</a>
+          <span class="mcf-footer-separator">•</span>
+          <a href="https://www.mycollegefinance.com/terms-policy" class="mcf-footer-link" target="_blank" rel="noopener">Terms of Service</a>
+          <span class="mcf-footer-separator">•</span>
+          <a href="https://linktr.ee/mycollegefinance" class="mcf-footer-link" target="_blank" rel="noopener">Social Media</a>
+        </div>
+        
+        <p class="mcf-footer-tagline">EDUCATE • MOTIVATE • ELEVATE</p>
+        <p class="mcf-footer-copyright">© 2025 My College Finance. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auto-save Indicator -->
+  <div class="mcf-save-indicator" id="save-indicator">
+    ✅ Auto-saved
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    // Collapsible toggle functionality
+    function toggleSection(id) {
+      const content = document.getElementById(id);
+      const icon = document.getElementById(id + '-icon');
+      
+      if (content.style.display === 'none') {
+        content.style.display = 'block';
+        icon.textContent = '▲';
+      } else {
+        content.style.display = 'none';
+        icon.textContent = '▼';
+      }
+    }
+
+    // Account counters for each category
+    const accountCounters = {
+      cash: 0,
+      investments: 0,
+      education: 0,
+      other: 0
+    };
+    
+    // Default account templates
+    const accountTemplates = {
+      cash: [
+        { name: 'Checking Account', emoji: '💵', helper: 'Enter the current balance shown in your account' },
+        { name: 'Savings Account', emoji: '💰', helper: 'Include all savings accounts' },
+        { name: 'Cash on Hand', emoji: '💵', helper: 'Physical cash (don\'t include change jars under $100)' }
+      ],
+      investments: [
+        { name: 'Brokerage/Investment Account', emoji: '📊', helper: 'Current market value as of today' },
+        { name: 'Stocks, Bonds, or Mutual Funds', emoji: '🎯', helper: 'Total market value of all holdings' },
+        { name: 'Money Market Account', emoji: '💎', helper: '' },
+        { name: 'Certificate of Deposit (CD)', emoji: '📜', helper: '' },
+        { name: 'Cryptocurrency Holdings', emoji: '🌐', helper: 'Current market value of all crypto assets' }
+      ],
+      education: [
+        { name: '529 Plan (Parent-Owned)', emoji: '🎓', helper: 'Current account value where parent is the account owner' },
+        { name: '529 Plan (Student-Owned)', emoji: '🎓', helper: 'Current account value where you (student) are the account owner' },
+        { name: 'Coverdell ESA', emoji: '📚', helper: '' },
+        { name: 'Prepaid Tuition Plan', emoji: '🏛️', helper: 'Refund value if you decided not to attend' }
+      ],
+      other: [
+        { name: 'Trust Fund Balance', emoji: '🏛️', helper: 'Only if you can currently access the funds' },
+        { name: 'Real Estate (Not Primary Home)', emoji: '🏢', helper: 'Net equity in investment properties, vacation homes, etc.' },
+        { name: 'UGMA/UTMA Custodial Account', emoji: '💰', helper: 'Accounts held in your name with parent as custodian' },
+        { name: 'Other Assets', emoji: '🔷', helper: 'Precious metals, collections worth over $1,000, etc.' }
+      ]
+    };
+    
+    // Add a new account row
+    function addAccount(category) {
+      const container = document.getElementById(`${category}-accounts`);
+      const id = `${category}-${accountCounters[category]++}`;
+      
+      const row = document.createElement('div');
+      row.className = 'mcf-account-row';
+      row.id = `row-${id}`;
+      
+      row.innerHTML = `
+        <div class="mcf-form-group" style="flex: 2;">
+          <label class="mcf-label">Account Name</label>
+          <input type="text" class="mcf-input" id="name-${id}" placeholder="e.g., Chase Checking" value="">
+        </div>
+        <div class="mcf-form-group" style="flex: 1;">
+          <label class="mcf-label">Amount</label>
+          <input type="number" class="mcf-input asset-input" data-category="${category}" id="${id}" placeholder="$0.00" step="0.01">
+        </div>
+        <button class="mcf-btn mcf-btn-icon mcf-btn-delete" onclick="deleteAccount('${id}', '${category}')" title="Delete this account">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+            <path d="M6 6L14 14M14 6L6 14" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      `;
+      
+      container.appendChild(row);
+      
+      // Add event listeners
+      document.getElementById(`name-${id}`).addEventListener('input', autoSave);
+      document.getElementById(id).addEventListener('input', () => {
+        autoSave();
+        // Visual feedback
+        const input = document.getElementById(id);
+        if (parseFloat(input.value) > 0) {
+          input.classList.add('filled');
+        } else {
+          input.classList.remove('filled');
+        }
+      });
+      
+      autoSave();
+    }
+    
+    // Delete an account row
+    function deleteAccount(id, category) {
+      const row = document.getElementById(`row-${id}`);
+      if (row) {
+        row.remove();
+        calculateSection(category);
+        autoSave();
+      }
+    }
+    
+    // Calculate section total
+    function calculateSection(category) {
+      const inputs = document.querySelectorAll(`.asset-input[data-category="${category}"]`);
+      let total = 0;
+      
+      inputs.forEach(input => {
+        const value = parseFloat(input.value) || 0;
+        total += value;
+      });
+      
+      const totalElement = document.getElementById(`total-${category}`);
+      const summaryElement = document.getElementById(`summary-${category}`);
+      
+      if (totalElement) totalElement.textContent = formatCurrency(total);
+      if (summaryElement) summaryElement.textContent = formatCurrency(total);
+      
+      calculateGrandTotal();
+    }
+    
+    // Calculate grand total
+    function calculateGrandTotal() {
+      const categories = ['cash', 'investments', 'education', 'other'];
+      let grandTotal = 0;
+      
+      categories.forEach(category => {
+        const inputs = document.querySelectorAll(`.asset-input[data-category="${category}"]`);
+        inputs.forEach(input => {
+          grandTotal += parseFloat(input.value) || 0;
+        });
+      });
+      
+      const grandTotalElement = document.getElementById('grand-total');
+      if (grandTotalElement) {
+        grandTotalElement.textContent = formatCurrency(grandTotal);
+      }
+    }
+    
+    // Initialize sections with default accounts
+    function initializeSections() {
+      Object.keys(accountTemplates).forEach(category => {
+        const container = document.getElementById(`${category}-accounts`);
+        if (container && container.children.length === 0) {
+          // Add first 2 default accounts for each category
+          accountTemplates[category].slice(0, 2).forEach(() => {
+            addAccount(category);
+          });
+        }
+      });
+    }
+    
+    // Dark Mode Toggle
+    function initDarkMode() {
+      const currentTheme = localStorage.getItem('mcf-theme') || 'light';
+      if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeIcon(true);
+      }
+      
+      const toggleBtn = document.getElementById('mcf-theme-toggle');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          const isDark = document.body.classList.toggle('dark-mode');
+          localStorage.setItem('mcf-theme', isDark ? 'dark' : 'light');
+          updateThemeIcon(isDark);
+        });
+      }
+    }
+    
+    function updateThemeIcon(isDark) {
+      const sunIcon = document.querySelector('.mcf-sun-icon');
+      const moonIcon = document.querySelector('.mcf-moon-icon');
+      if (sunIcon && moonIcon) {
+        sunIcon.style.display = isDark ? 'none' : 'block';
+        moonIcon.style.display = isDark ? 'block' : 'none';
+      }
+    }
+    
+    // Format currency
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+      }).format(amount);
+    }
+    
+    // Auto-save functionality
+    let saveTimeout;
+    function showSaveIndicator() {
+      const indicator = document.getElementById('save-indicator');
+      indicator.classList.add('show');
+      setTimeout(() => {
+        indicator.classList.remove('show');
+      }, 2000);
+    }
+    
+    function autoSave() {
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(saveFormData, 1000);
+    }
+    
+    function saveFormData() {
+      const formData = {
+        studentName: document.getElementById('student-name')?.value || '',
+        completionDate: document.getElementById('completion-date')?.value || '',
+        accounts: {}
+      };
+      
+      // Save all account data
+      ['cash', 'investments', 'education', 'other'].forEach(category => {
+        formData.accounts[category] = [];
+        const container = document.getElementById(`${category}-accounts`);
+        if (container) {
+          Array.from(container.children).forEach(row => {
+            const id = row.id.replace('row-', '');
+            const nameInput = document.getElementById(`name-${id}`);
+            const amountInput = document.getElementById(id);
+            
+            if (nameInput && amountInput) {
+              formData.accounts[category].push({
+                name: nameInput.value,
+                amount: amountInput.value
+              });
+            }
+          });
+        }
+      });
+      
+      formData.counters = accountCounters;
+      
+      localStorage.setItem('mcf-fafsa-worksheet', JSON.stringify(formData));
+      showSaveIndicator();
+    }
+    
+    function loadFormData() {
+      const savedData = localStorage.getItem('mcf-fafsa-worksheet');
+      if (savedData) {
+        try {
+          const formData = JSON.parse(savedData);
+          
+          // Restore student info
+          if (formData.studentName) {
+            document.getElementById('student-name').value = formData.studentName;
+          }
+          if (formData.completionDate) {
+            document.getElementById('completion-date').value = formData.completionDate;
+          }
+          
+          // Restore counters
+          if (formData.counters) {
+            Object.assign(accountCounters, formData.counters);
+          }
+          
+          // Restore accounts
+          if (formData.accounts) {
+            Object.keys(formData.accounts).forEach(category => {
+              const container = document.getElementById(`${category}-accounts`);
+              if (container) {
+                container.innerHTML = ''; // Clear defaults
+                
+                formData.accounts[category].forEach(account => {
+                  const id = `${category}-${accountCounters[category]++}`;
+                  const row = document.createElement('div');
+                  row.className = 'mcf-account-row';
+                  row.id = `row-${id}`;
+                  
+                  row.innerHTML = `
+                    <div class="mcf-form-group" style="flex: 2;">
+                      <label class="mcf-label">Account Name</label>
+                      <input type="text" class="mcf-input" id="name-${id}" placeholder="e.g., Chase Checking" value="${account.name || ''}">
+                    </div>
+                    <div class="mcf-form-group" style="flex: 1;">
+                      <label class="mcf-label">Amount</label>
+                      <input type="number" class="mcf-input asset-input ${parseFloat(account.amount) > 0 ? 'filled' : ''}" data-category="${category}" id="${id}" placeholder="$0.00" step="0.01" value="${account.amount || ''}">
+                    </div>
+                    <button class="mcf-btn mcf-btn-icon mcf-btn-delete" onclick="deleteAccount('${id}', '${category}')" title="Delete this account">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                        <path d="M6 6L14 14M14 6L6 14" stroke-width="2" stroke-linecap="round"/>
+                      </svg>
+                    </button>
+                  `;
+                  
+                  container.appendChild(row);
+                  
+                  // Add event listeners
+                  document.getElementById(`name-${id}`).addEventListener('input', autoSave);
+                  document.getElementById(id).addEventListener('input', () => {
+                    autoSave();
+                    const input = document.getElementById(id);
+                    if (parseFloat(input.value) > 0) {
+                      input.classList.add('filled');
+                    } else {
+                      input.classList.remove('filled');
+                    }
+                  });
+                });
+              }
+            });
+          }
+          
+          // Calculate all totals
+          ['cash', 'investments', 'education', 'other'].forEach(calculateSection);
+        } catch (e) {
+          console.error('Error loading saved data:', e);
+          initializeSections();
+        }
+      } else {
+        initializeSections();
+      }
+    }
+    
+    // Set default date
+    function setDefaultDate() {
+      const dateInput = document.getElementById('completion-date');
+      if (dateInput && !dateInput.value) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.value = today;
+      }
+    }
+    
+    // Generate PDF
+    async function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      const studentName = document.getElementById('student-name').value || 'Student Name';
+      const completionDate = document.getElementById('completion-date').value || new Date().toLocaleDateString();
+      
+      // Header
+      doc.setFillColor(1, 38, 153);
+      doc.rect(0, 0, 210, 40, 'F');
+      
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(24);
+      doc.setFont(undefined, 'bold');
+      doc.text('FAFSA Asset Reporting Worksheet', 105, 20, { align: 'center' });
+      
+      doc.setFontSize(10);
+      doc.setFont(undefined, 'normal');
+      doc.text('MY COLLEGE FINANCE • EDUCATE • MOTIVATE • ELEVATE', 105, 30, { align: 'center' });
+      
+      // Student Info
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(12);
+      let yPos = 50;
+      doc.text(`Student: ${studentName}`, 20, yPos);
+      doc.text(`Date: ${completionDate}`, 150, yPos);
+      
+      yPos += 15;
+      
+      // Function to add section
+      function addSection(title, category, yPosition) {
+        let yPos = yPosition;
+        
+        doc.setFillColor(240, 240, 240);
+        doc.rect(10, yPos, 190, 8, 'F');
+        doc.setFont(undefined, 'bold');
+        doc.setFontSize(12);
+        doc.text(title, 15, yPos + 5);
+        yPos += 12;
+        
+        doc.setFont(undefined, 'normal');
+        doc.setFontSize(10);
+        
+        const container = document.getElementById(`${category}-accounts`);
+        if (container) {
+          Array.from(container.children).forEach(row => {
+            const id = row.id.replace('row-', '');
+            const nameInput = document.getElementById(`name-${id}`);
+            const amountInput = document.getElementById(id);
+            
+            if (nameInput && amountInput && parseFloat(amountInput.value) > 0) {
+              const name = nameInput.value || 'Unnamed Account';
+              const value = formatCurrency(parseFloat(amountInput.value));
+              
+              // Check if we need a new page
+              if (yPos > 260) {
+                doc.addPage();
+                yPos = 20;
+              }
+              
+              // Ensure proper spacing between account name and amount
+              const nameWidth = doc.getTextWidth(name);
+              const valueWidth = doc.getTextWidth(value);
+              
+              // If names are too long, truncate them
+              let displayName = name;
+              if (nameWidth > 120) {
+                displayName = name.substring(0, 30) + '...';
+              }
+              
+              doc.text(displayName, 20, yPos);
+              doc.text(value, 190, yPos, { align: 'right' });
+              yPos += 8;
+            }
+          });
+        }
+        
+        const total = document.getElementById(`total-${category}`).textContent;
+        doc.setFont(undefined, 'bold');
+        
+        // Check if we need a new page for total
+        if (yPos > 265) {
+          doc.addPage();
+          yPos = 20;
+        }
+        
+        // Add spacing before total
+        yPos += 5;
+        
+        // Add total with proper spacing
+        doc.text(`${title} Total:`, 20, yPos);
+        doc.text(total, 190, yPos, { align: 'right' });
+        yPos += 15;
+        
+        return yPos;
+      }
+      
+      // Add all sections
+      yPos = addSection('Section 1: Cash & Checking', 'cash', yPos);
+      
+      if (yPos > 230) {
+        doc.addPage();
+        yPos = 20;
+      }
+      yPos = addSection('Section 2: Investments', 'investments', yPos);
+      
+      if (yPos > 230) {
+        doc.addPage();
+        yPos = 20;
+      }
+      yPos = addSection('Section 3: Education Savings', 'education', yPos);
+      
+      if (yPos > 230) {
+        doc.addPage();
+        yPos = 20;
+      }
+      yPos = addSection('Section 4: Other Assets', 'other', yPos);
+      
+      // Check if we need a new page for grand total
+      if (yPos > 250) {
+        doc.addPage();
+        yPos = 20;
+      }
+      
+      // Grand Total
+      yPos += 15;
+      
+      // Add separator line
+      doc.setDrawColor(1, 38, 153);
+      doc.setLineWidth(2);
+      doc.line(20, yPos, 190, yPos);
+      yPos += 10;
+      
+      doc.setFillColor(1, 38, 153);
+      doc.rect(10, yPos, 190, 20, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(16);
+      doc.setFont(undefined, 'bold');
+      doc.text('TOTAL REPORTABLE ASSETS:', 20, yPos + 12);
+      const grandTotal = document.getElementById('grand-total').textContent;
+      doc.setFontSize(18);
+      doc.text(grandTotal, 190, yPos + 12, { align: 'right' });
+      
+      // Footer
+      const pageCount = doc.internal.getNumberOfPages();
+      for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setTextColor(100, 100, 100);
+        doc.setFontSize(8);
+        doc.text('© 2025 My College Finance. All rights reserved.', 105, 285, { align: 'center' });
+        doc.text('www.mycollegefinance.com', 105, 290, { align: 'center' });
+      }
+      
+      // Save PDF
+      doc.save(`FAFSA_Asset_Worksheet_${studentName.replace(/\s+/g, '_')}.pdf`);
+    }
+    
+    // Download user results as PDF
+    function downloadUserResults() {
+      // Auto-save current data first
+      saveFormData();
+      
+      // Generate PDF with current user data
+      generatePDF();
+    }
+    
+    // Reset form
+    function resetForm() {
+      if (confirm('Are you sure you want to reset all fields? This action cannot be undone.')) {
+        localStorage.removeItem('mcf-fafsa-worksheet');
+        
+        // Reset counters
+        Object.keys(accountCounters).forEach(key => {
+          accountCounters[key] = 0;
+        });
+        
+        // Clear all containers
+        ['cash', 'investments', 'education', 'other'].forEach(category => {
+          const container = document.getElementById(`${category}-accounts`);
+          if (container) {
+            container.innerHTML = '';
+          }
+        });
+        
+        // Clear student info
+        document.getElementById('student-name').value = '';
+        setDefaultDate();
+        
+        // Reinitialize
+        initializeSections();
+        
+        // Reset all totals
+        ['cash', 'investments', 'education', 'other'].forEach(category => {
+          calculateSection(category);
+        });
+      }
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      initDarkMode();
+      setDefaultDate();
+      loadFormData();
+      
+      // Add event listeners to student info
+      document.getElementById('student-name')?.addEventListener('input', autoSave);
+      document.getElementById('completion-date')?.addEventListener('input', autoSave);
+      
+      // Button listeners
+      document.getElementById('save-pdf')?.addEventListener('click', generatePDF);
+      document.getElementById('download-results')?.addEventListener('click', downloadUserResults);
+      document.getElementById('reset-form')?.addEventListener('click', resetForm);
+    });
+  </script>
+</body>
+</html>
