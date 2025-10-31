@@ -32,6 +32,24 @@
       --mcf-transition: all 0.3s ease;
       --mcf-success: #26e011;
       --mcf-warning: #fdc003;
+
+      /* Touch Targets & Spacing */
+      --touch-target-min: 44px;
+      --touch-target-recommended: 48px;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 0.75rem;
+      --spacing-md: 1rem;
+      --spacing-lg: 1.5rem;
+      --spacing-xl: 2rem;
+      --spacing-xxl: 3rem;
+
+      /* Typography Scale */
+      --font-base: 16px;
+      --font-sm: 0.875rem;
+      --font-md: 0.9375rem;
+      --font-lg: 1.125rem;
+      --font-xl: 1.25rem;
+      --font-xxl: 1.5rem;
     }
     
     /* Dark Mode */
@@ -142,8 +160,10 @@
     
     /* Theme Toggle */
     .mcf-theme-toggle {
-      width: 44px;
-      height: 44px;
+      width: 52px;
+      height: 52px;
+      min-width: var(--touch-target-recommended);
+      min-height: var(--touch-target-recommended);
       padding: 0;
       border: 2px solid var(--mcf-border);
       background: var(--mcf-card);
@@ -154,6 +174,8 @@
       justify-content: center;
       transition: var(--mcf-transition);
       color: var(--mcf-foreground);
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     
     .mcf-theme-toggle:hover {
@@ -321,6 +343,8 @@
       align-items: center;
       justify-content: center;
       padding: 0.75rem 1.5rem;
+      min-height: var(--touch-target-recommended);
+      min-width: var(--touch-target-min);
       font-size: 0.875rem;
       font-weight: 600;
       border-radius: var(--mcf-radius);
@@ -331,6 +355,8 @@
       text-decoration: none;
       font-family: inherit;
       gap: 0.5rem;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
     
     .mcf-btn-primary {
@@ -698,8 +724,45 @@
       margin-bottom: 1rem;
     }
     
+    /* Accessibility - Focus Indicators */
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    .mcf-theme-toggle:focus-visible,
+    .mcf-toggle-btn:focus-visible {
+      outline: 3px solid var(--mcf-brand-blue);
+      outline-offset: 2px;
+    }
+
+    /* Selection Styling */
+    ::selection {
+      background-color: var(--mcf-brand-blue);
+      color: white;
+    }
+
+    /* Reduce Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Tablet (768px - 1024px) */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      body { font-size: 17px; }
+      .mcf-hero-title { font-size: clamp(2rem, 4vw + 1rem, 2.5rem); }
+      .mcf-btn { min-height: 52px; }
+      .mcf-theme-toggle { width: 52px; height: 52px; }
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
+      body { font-size: 16px; }
+
       .mcf-brand-text {
         display: none;
       }
@@ -710,7 +773,18 @@
       }
       
       .mcf-hero-title {
-        font-size: 1.75rem;
+        font-size: clamp(1.5rem, 5vw + 0.5rem, 1.75rem);
+        hyphens: none;
+        word-break: normal;
+      }
+
+      .mcf-btn {
+        min-height: 48px;
+      }
+
+      .mcf-theme-toggle {
+        width: 48px;
+        height: 48px;
       }
       
       .mcf-total-amount {
@@ -787,18 +861,215 @@
 
     /* Print Styles */
     @media print {
-      .mcf-header, .mcf-footer, .mcf-btn-group, .mcf-theme-toggle, .mcf-save-indicator {
+      /* Page setup */
+      @page {
+        size: letter;
+        margin: 0.75in;
+      }
+
+      /* Hide interactive elements */
+      .mcf-header,
+      .mcf-footer,
+      .mcf-btn-group,
+      .mcf-theme-toggle,
+      .mcf-save-indicator,
+      .mcf-btn,
+      .mcf-btn-add,
+      .mcf-btn-delete,
+      .mcf-btn-secondary,
+      .mcf-btn-calculate,
+      button {
         display: none !important;
       }
-      
+
+      /* Typography for print */
       body {
-        background: white;
-        color: black;
+        font-size: 11pt !important;
+        font-family: "Times New Roman", Times, serif !important;
+        line-height: 1.4 !important;
+        color: #000 !important;
+        background: white !important;
       }
-      
+
+      /* Headings */
+      h1, .mcf-hero-title {
+        font-size: 18pt !important;
+        color: #012699 !important;
+        page-break-after: avoid;
+      }
+
+      h2, .mcf-card-title {
+        font-size: 14pt !important;
+        color: #012699 !important;
+        page-break-after: avoid;
+        margin-top: 12pt;
+      }
+
+      h3 {
+        font-size: 12pt !important;
+        page-break-after: avoid;
+      }
+
+      /* Container */
+      .mcf-container {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+
+      /* Cards and sections */
       .mcf-card {
-        border: 1px solid #ccc;
+        background: white !important;
+        border: 1px solid #333 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
         page-break-inside: avoid;
+        margin-bottom: 12pt !important;
+        padding: 12pt !important;
+      }
+
+      .mcf-card-header {
+        border-bottom: 2px solid #012699 !important;
+        margin-bottom: 8pt !important;
+      }
+
+      /* Alert boxes */
+      .mcf-alert {
+        background: #fff9e6 !important;
+        border: 2px solid #fdc003 !important;
+        padding: 8pt !important;
+        margin-bottom: 12pt !important;
+      }
+
+      /* Info and warning boxes */
+      .mcf-info-box,
+      .mcf-warning-box,
+      .mcf-collapsible-content {
+        background: white !important;
+        border: 1px solid #333 !important;
+        padding: 8pt !important;
+        margin: 8pt 0 !important;
+        page-break-inside: avoid;
+      }
+
+      .mcf-collapsible-content {
+        display: block !important;
+      }
+
+      /* Toggle buttons (show as headers) */
+      .mcf-toggle-btn {
+        display: block !important;
+        background: #f0f0f0 !important;
+        border: 1px solid #333 !important;
+        padding: 6pt !important;
+        margin: 4pt 0 !important;
+        font-weight: bold !important;
+      }
+
+      /* Account rows */
+      .mcf-account-row {
+        background: white !important;
+        border: 1px solid #ddd !important;
+        padding: 6pt !important;
+        margin-bottom: 6pt !important;
+        display: flex !important;
+        justify-content: space-between !important;
+      }
+
+      /* Form elements */
+      .mcf-input {
+        border: none !important;
+        border-bottom: 1px solid #333 !important;
+        background: transparent !important;
+        padding: 2pt 0 !important;
+        font-family: inherit !important;
+      }
+
+      .mcf-label {
+        font-weight: bold !important;
+        font-size: 9pt !important;
+        color: #000 !important;
+      }
+
+      /* Total cards */
+      .mcf-total-card {
+        background: #f0f0f0 !important;
+        border: 2px solid #012699 !important;
+        padding: 12pt !important;
+        text-align: center !important;
+        page-break-inside: avoid;
+      }
+
+      .mcf-total-amount {
+        font-size: 18pt !important;
+        font-weight: bold !important;
+        color: #012699 !important;
+      }
+
+      .mcf-total-label {
+        font-size: 10pt !important;
+        font-weight: bold !important;
+        color: #000 !important;
+        text-transform: uppercase;
+      }
+
+      /* Grand total */
+      #grand-total {
+        font-size: 24pt !important;
+      }
+
+      /* Checklist */
+      .mcf-checklist {
+        background: white !important;
+        border: 2px solid #333 !important;
+        padding: 12pt !important;
+        page-break-inside: avoid;
+      }
+
+      .mcf-checklist-item {
+        border-bottom: 1px solid #ddd !important;
+        padding: 6pt 0 !important;
+      }
+
+      /* Section footer */
+      .mcf-section-footer {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        border-top: 2px solid #333 !important;
+        padding-top: 8pt !important;
+        margin-top: 8pt !important;
+      }
+
+      /* Grid layouts */
+      .mcf-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12pt !important;
+      }
+
+      /* Links */
+      a {
+        color: #000 !important;
+        text-decoration: underline !important;
+      }
+
+      a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 8pt;
+        font-style: italic;
+      }
+
+      /* Page breaks */
+      .mcf-card,
+      .mcf-total-card,
+      .mcf-checklist {
+        page-break-inside: avoid;
+      }
+
+      /* Ensure proper spacing */
+      p, li {
+        orphans: 3;
+        widows: 3;
       }
     }
   </style>
@@ -816,7 +1087,7 @@
           >
           <div class="mcf-brand-text">
             <h1 class="mcf-brand-name">MY COLLEGE FINANCE</h1>
-            <p class="mcf-tagline">EDUCATE • MOTIVATE • ELEVATE</p>
+            <p class="mcf-tagline">EDUCATE - MOTIVATE - ELEVATE</p>
           </div>
         </div>
         <div class="mcf-header-actions">
@@ -1174,21 +1445,13 @@
 
       <!-- Action Buttons -->
       <div class="mcf-btn-group">
-        <button class="mcf-btn mcf-btn-success" id="save-pdf">
+        <button class="mcf-btn mcf-btn-success" id="download-results">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
             <path d="M10 14V3M10 14L6 10M10 14L14 10M3 17H17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Save & Download PDF
+          💾 Save & Download PDF
         </button>
-        
-        <button class="mcf-btn mcf-btn-primary" id="download-results">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
-            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V16C4 16.5304 4.21071 17.0391 4.58579 17.4142C4.96086 17.7893 5.46957 18 6 18H14C14.5304 18 15.0391 17.7893 15.4142 17.4142C15.7893 17.0391 16 16.5304 16 16V4C16 3.46957 15.7893 2.96086 15.4142 2.58579C15.0391 2.21071 14.5304 2 14 2Z" stroke-width="2"/>
-            <path d="M7 6H13M7 10H13M7 14H10" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          📄 Download My Results
-        </button>
-        
+
         <button class="mcf-btn mcf-btn-reset" id="reset-form" title="⚠️ This will permanently delete all your data">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor">
             <path d="M3 10C3 10 3 5 10 5C17 5 17 10 17 10C17 10 17 15 10 15C3 15 3 10 3 10Z" stroke-width="2"/>
@@ -1223,7 +1486,7 @@
           <a href="https://linktr.ee/mycollegefinance" class="mcf-footer-link" target="_blank" rel="noopener">Social Media</a>
         </div>
         
-        <p class="mcf-footer-tagline">EDUCATE • MOTIVATE • ELEVATE</p>
+        <p class="mcf-footer-tagline">EDUCATE - MOTIVATE - ELEVATE</p>
         <p class="mcf-footer-copyright">© 2025 My College Finance. All rights reserved.</p>
       </div>
     </div>
@@ -1318,7 +1581,7 @@
       document.getElementById(`name-${id}`).addEventListener('input', autoSave);
       document.getElementById(id).addEventListener('input', () => {
         autoSave();
-        // Visual feedback
+        // Visual feedback only - don't calculate automatically
         const input = document.getElementById(id);
         if (parseFloat(input.value) > 0) {
           input.classList.add('filled');
@@ -1335,7 +1598,6 @@
       const row = document.getElementById(`row-${id}`);
       if (row) {
         row.remove();
-        calculateSection(category);
         autoSave();
       }
     }
@@ -1528,6 +1790,7 @@
                   document.getElementById(`name-${id}`).addEventListener('input', autoSave);
                   document.getElementById(id).addEventListener('input', () => {
                     autoSave();
+                    // Visual feedback only - don't calculate automatically
                     const input = document.getElementById(id);
                     if (parseFloat(input.value) > 0) {
                       input.classList.add('filled');
@@ -1539,9 +1802,8 @@
               }
             });
           }
-          
-          // Calculate all totals
-          ['cash', 'investments', 'education', 'other'].forEach(calculateSection);
+
+          // Don't calculate automatically on load - user must click Calculate Total buttons
         } catch (e) {
           console.error('Error loading saved data:', e);
           initializeSections();
@@ -1579,7 +1841,7 @@
       
       doc.setFontSize(10);
       doc.setFont(undefined, 'normal');
-      doc.text('MY COLLEGE FINANCE • EDUCATE • MOTIVATE • ELEVATE', 105, 30, { align: 'center' });
+      doc.text('MY COLLEGE FINANCE - EDUCATE - MOTIVATE - ELEVATE', 105, 30, { align: 'center' });
       
       // Student Info
       doc.setTextColor(0, 0, 0);
